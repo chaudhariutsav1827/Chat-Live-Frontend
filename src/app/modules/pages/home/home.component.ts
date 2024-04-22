@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
-import { HeaderComponent } from "../header/header.component";
-import { SidebarComponent } from "../sidebar/sidebar.component";
-import { MessageBoxComponent } from "../message-box/message-box.component";
+import { HeaderComponent } from "./components/header/header.component";
+import { SidebarComponent } from "./components/sidebar/sidebar.component";
+import { MessageBoxComponent } from "./components/message-box/message-box.component";
 
 @Component({
   selector: "chat-live-home",
