@@ -27,7 +27,8 @@
             "style": "kebab-case"
           }
         ],
-        "@typescript-eslint/indent": [1, 2]
+        "@typescript-eslint/indent": [1, 2],
+        "max-len": ["warn",120]
       }
     },
     {
@@ -40,3 +41,4 @@
     }
   ]
 }
+  

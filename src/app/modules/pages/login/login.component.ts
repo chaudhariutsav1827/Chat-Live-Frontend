@@ -24,7 +24,6 @@ export class LoginComponent {
 
   login() {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
       this.loginRepo.login(this.loginForm.value).subscribe({
         next: (res) => {
           if (res.success) {

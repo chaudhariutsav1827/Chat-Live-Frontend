@@ -1,10 +1,14 @@
 <div class="h-[100vh] w-[100vw] flex">
-    <chat-live-sidebar />
-    <div class="flex flex-col h-full w-[calc(100vw-300px)]">
-        <chat-live-header />
-        <chat-live-message-box />
-        <div class="h-[60px] p-1">
-            <input type="text" class="w-full h-full p-1 outline-none" placeholder="Write Something...">
-        </div>
+  <chat-live-sidebar />
+  <div class="flex flex-col h-full w-[calc(100vw-300px)]">
+    @if(chatService.currentChatUser()){
+    <chat-live-header />
+    <chat-live-message-box />
+    <div class="h-[60px] p-1">
+      <input type="text" [(ngModel)]="message" (ngModelChange)="debounceMessageChange($event)" class="w-full h-full p-1 outline-none" placeholder="Write Something..." (keydown.enter)="sendMessage()" />
     </div>
+    } @else {
+    <div class="h-full bg-indigo-100"></div>
+    }
+  </div>
 </div>

@@ -1,7 +1,8 @@
 <div class="h-[80px] p-2 flex bg-white">
-    <div class="flex justify-center items-center ml-3 gap-2">
-        <span
-            class="h-[50px] w-[50px] rounded-full bg-blue-900 text-gray-100 text-lg flex justify-center items-center">MB</span>
-        <span class="text-gray-600 font-medium">Mit Bhayani</span>
-    </div>
+  <div class="flex justify-center items-center ml-3 gap-2">
+    <span class="h-[50px] w-[50px] rounded-full bg-blue-900 text-gray-100 text-lg flex justify-center items-center">{{
+      chatService.currentChatUser()?.name?.charAt(0)
+    }}</span>
+    <span class="text-gray-600 font-medium">{{ chatService.currentChatUser()?.name }}</span>
+  </div>
 </div>

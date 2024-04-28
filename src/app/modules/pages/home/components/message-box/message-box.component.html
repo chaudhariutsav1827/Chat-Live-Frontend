@@ -1,10 +1,13 @@
 <div class="h-[calc(100vh-140px)] overflow-auto bg-indigo-100 flex flex-col gap-3">
-    <div class="p-3 flex gap-2">
-        <span class="h-full flex flex-col gap-1 items-center justify-center">
-            <span
-                class="h-[40px] w-[40px] rounded-full bg-orange-500 text-gray-100 flex items-center justify-center">JD</span>
-            <span class="text-xs text-gray-500">10:32</span>
-        </span>
-        <span class="max-w-xl flex p-3 text-sm rounded-md font-normal bg-gray-100">{{"Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt repellendus nisi quae eos et quod, deserunt repellat tempora numquam laudantium, beatae dolorem laboriosam quos enim officiis eligendi alias ab voluptates."}}</span>
-    </div>
+  @for (message of messages; track message) {
+  <div class="p-3 flex gap-2" [class.flex-row-reverse]="message.from !== currentChatUser._id">
+    <span class="h-full flex flex-col gap-1 items-center justify-center">
+      <span class="h-[30px] w-[30px] rounded-full bg-orange-500 text-gray-100 flex items-center justify-center">
+        {{ message.from === currentChatUser._id ? currentChatUser.name.charAt(0) : loggedUser.name.charAt(0) }}
+      </span>
+      <span class="text-xs text-gray-500">{{ message.createdAt.split(" ")[1] }}</span>
+    </span>
+    <span class="max-w-xl flex p-3 text-sm rounded-md font-normal bg-gray-100">{{ message.message }}</span>
+  </div>
+  }
 </div>

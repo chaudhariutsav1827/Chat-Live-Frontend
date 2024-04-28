@@ -53,6 +53,7 @@ export class AuthService {
         id: decodedToken._id,
         email: decodedToken.email,
         role: decodedToken.role,
+        name: decodedToken.name,
       };
     }
   }

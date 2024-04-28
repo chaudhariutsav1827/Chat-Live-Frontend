@@ -1,0 +1,14 @@
+<button (click)="selectChat(user)" class="w-full">
+  <div class="w-full h-[90px] bg-indigo-400 hover:bg-indigo-700 cursor-pointer relative select-none">
+    <div class="flex items-center p-2 gap-2 h-full">
+      <span class="h-[60px] w-[60px] rounded-full bg-orange-500 text-gray-300 text-xl flex items-center justify-center">{{
+        user.name.charAt(0)
+      }}</span>
+      <span class="flex flex-col text-left gap-1">
+        <span class="text-lg text-white-700">{{ user.name }}</span>
+        <span class="text-sm text-white-500">{{ "Hello, did you see my.." }}</span>
+      </span>
+    </div>
+    <span class="absolute top-1 right-2 text-xs text-gray-900">{{ unreadMessages +" minutes ago" }}</span>
+  </div>
+</button>
