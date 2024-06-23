@@ -11,23 +11,24 @@ import { jwtDecode } from "jwt-decode";
 export class AuthService {
   constructor(private router: Router) {}
 
-  private token: string;
-  private user: ILoggedUser;
+  #token: string;
+  #user: ILoggedUser;
 
   setToken(token: string) {
     localStorage.setItem(LocalStorageKeys.TOKEN, token);
-    this.token = token;
+    this.#token = token;
     this.setUser();
   }
 
   getToken(): string | null {
-    return this.token ?? localStorage.getItem(LocalStorageKeys.TOKEN);
+    return this.#token ?? localStorage.getItem(LocalStorageKeys.TOKEN);
   }
 
-  getUser(): ILoggedUser | null {
-    if (this.user) return this.user;
+  getUser(): ILoggedUser {
+    if (this.#user) return this.#user;
     this.setUser();
-    return this.user;
+    if (!this.#user) this.logout();
+    return this.#user!;
   }
 
   isTokenExpired(): boolean {
@@ -49,8 +50,8 @@ export class AuthService {
     const token = this.getToken();
     if (token) {
       const decodedToken: IJwtToken = jwtDecode(token);
-      this.user = {
-        id: decodedToken._id,
+      this.#user = {
+        id: decodedToken.userId,
         email: decodedToken.email,
         role: decodedToken.role,
         name: decodedToken.name,

@@ -1,28 +1,30 @@
 import { Injectable } from "@angular/core";
 import { io, Socket } from "socket.io-client";
 import { ChatService } from "src/app/shared/services/chat.service";
+import { AuthService } from "./auth.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class SocketService {
-  private webSocket: Socket;
-  constructor(private chatService: ChatService) {
-    this.webSocket = io("ws://localhost:1827");
-    this.newMessage();
+  socket: Socket;
+  constructor(private chatService: ChatService, private authService: AuthService) {
+    this.socket = io("ws://localhost:1827");
+    this.#joinGroup();
+    this.#newMessage();
   }
 
-  private newMessage() {
-    this.webSocket.on("newMessage", (message) => {
+  #newMessage() {
+    this.socket.on("new-message", (message) => {
       this.chatService.addNewMessage(message);
     });
   }
 
-  connectSocket(message: unknown) {
-    this.webSocket.emit("connect", message);
+  #joinGroup() {
+    this.socket.emit("join", this.authService.getUser().id);
   }
 
   disconnectSocket() {
-    this.webSocket.disconnect();
+    this.socket.disconnect();
   }
 }

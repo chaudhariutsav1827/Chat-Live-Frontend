@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { IUser } from "../../../models/home.interface";
 import { ChatService } from "src/app/shared/services/chat.service";
+import { IMessage } from "../../message-box/models/message.interface";
 
 @Component({
   selector: "chat-live-chat-block",
@@ -11,20 +12,24 @@ import { ChatService } from "src/app/shared/services/chat.service";
 })
 export class ChatBlockComponent implements OnInit {
   @Input({ required: true }) user: IUser;
-  unreadMessages: number;
-  constructor(protected chatService: ChatService) {}
+  unseenMessages: IMessage[] = [];
+  constructor(protected chatService: ChatService) {
+  }
 
-  ngOnInit() {
-    this.getUnreadMessages();
+  ngOnInit(): void {
+    this.#getUnreadMessages();
   }
 
   selectChat(user: IUser) {
     this.chatService.currentChatUser.set(user);
   }
 
-  private getUnreadMessages() {
-    this.unreadMessages = this.chatService
-      .messages()
-      .filter((message) => message._id === this.user._id && message.seen === false).length;
+  #getUnreadMessages() {
+    // const unseenMessages: IMessage[] = [];
+    // const messagesByDate = this.chatService.messages().get(this.user._id) ?? {};
+    // Object.values(messagesByDate).forEach((messages: IMessage[]) => {
+    //   unseenMessages.push(...messages.filter((message: IMessage) => !message.seen));
+    // });
+    // this.unseenMessages = unseenMessages;
   }
 }

@@ -3,6 +3,8 @@ import { UserRepository } from "src/app/modules/repositories/user.repository";
 import { IUser } from "../../models/home.interface";
 import { ChatService } from "src/app/shared/services/chat.service";
 import { ChatBlockComponent } from "./chat-block/chat-block.component";
+import { AuthService } from "@core/services";
+import { ILoggedUser } from "@core/models/interfaces";
 
 @Component({
   selector: "chat-live-sidebar",
@@ -14,7 +16,9 @@ import { ChatBlockComponent } from "./chat-block/chat-block.component";
 })
 export class SidebarComponent {
   users: IUser[] = [];
-  constructor(private userRepo: UserRepository, protected chatService: ChatService) {
+  loggedUser: ILoggedUser;
+  constructor(private userRepo: UserRepository, protected chatService: ChatService, private authService: AuthService) {
+    this.loggedUser = this.authService.getUser();
     this.getAllUsers();
   }
 
